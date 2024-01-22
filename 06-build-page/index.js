@@ -1,5 +1,6 @@
 const fs = require('fs').promises;
 const path = require('path');
+const os = require('os');
 
 async function buildPage() {
   const projectDistPath = path.join(__dirname, 'project-dist');
@@ -39,7 +40,7 @@ async function buildPage() {
       const filePath = path.join(stylesPath, file);
       const fileStat = await fs.stat(filePath);
       if (fileStat.isFile() && path.extname(file) === '.css') {
-        styleContent += (await fs.readFile(filePath, 'utf-8')) + '\n';
+        styleContent += (await fs.readFile(filePath, 'utf-8')) + os.EOL;
       }
     }
     await fs.writeFile(path.join(projectDistPath, 'style.css'), styleContent);

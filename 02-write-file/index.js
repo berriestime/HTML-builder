@@ -1,6 +1,7 @@
 const fs = require('fs');
 const readline = require('readline');
 const path = require('path');
+const os = require('os');
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -11,7 +12,7 @@ const outputFile = path.join(__dirname, 'output.txt');
 const outputStream = fs.createWriteStream(outputFile, { flags: 'a' });
 
 process.stdout.write(
-  'Welcome! Please enter text to write to the file. Type "exit" to end the session.\n',
+  `Welcome! Please enter text to write to the file. Type "exit" to end the session.${os.EOL}`,
 );
 
 const handleInput = (input) => {
@@ -19,9 +20,9 @@ const handleInput = (input) => {
     process.stdout.write('Thank you for using the text writer. Goodbye!');
     rl.close();
   } else {
-    outputStream.write(input + '\n');
+    outputStream.write(input + os.EOL);
     process.stdout.write(
-      'Text is written to the file. Continue typing or enter "exit" to end.\n',
+      `Text is written to the file. Continue typing or enter "exit" to end.${os.EOL}`,
     );
   }
 };

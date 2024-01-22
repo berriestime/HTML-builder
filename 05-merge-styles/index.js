@@ -1,5 +1,6 @@
 const fs = require('fs').promises;
 const path = require('path');
+const os = require('os');
 
 const stylesDir = path.join(__dirname, 'styles');
 const outputDir = path.join(__dirname, 'project-dist');
@@ -21,7 +22,7 @@ function createCssBundle() {
       return Promise.all(fileReads);
     })
     .then((styles) => {
-      const stylesBundle = styles.join('\n');
+      const stylesBundle = styles.join(os.EOL);
       return fs.writeFile(outputFile, stylesBundle);
     })
     .then(() => {

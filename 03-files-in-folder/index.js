@@ -1,5 +1,6 @@
 const fs = require('fs').promises;
 const path = require('path');
+const os = require('os');
 
 const BYTES_IN_KB = 1024;
 const folderPath = path.join(__dirname, 'secret-folder');
@@ -17,12 +18,14 @@ async function displayFilesInfo() {
         const fileSize = fileStats.size / BYTES_IN_KB;
 
         process.stdout.write(
-          `${fileName} - ${fileExt.slice(1)} - ${fileSize.toFixed(3)}kb\n`,
+          `${fileName} - ${fileExt.slice(1)} - ${fileSize.toFixed(3)}kb${
+            os.EOL
+          }`,
         );
       }
     }
   } catch (error) {
-    process.stderr.write(`Error reading the directory ${error}\n`);
+    process.stderr.write(`Error reading the directory ${error}${os.EOL}`);
   }
 }
 
