@@ -17,7 +17,6 @@ process.stdout.write(
 
 const handleInput = (input) => {
   if (input.trim().toLowerCase() === 'exit') {
-    process.stdout.write('Thank you for using the text writer. Goodbye!');
     rl.close();
   } else {
     outputStream.write(input + os.EOL);
@@ -30,11 +29,11 @@ const handleInput = (input) => {
 rl.on('line', handleInput);
 
 process.on('SIGINT', () => {
-  process.stdout.write('Process was interrupted. Exiting now.');
   rl.close();
 });
 
 rl.on('close', () => {
+  process.stdout.write('Thank you for using the text writer. Goodbye!');
   outputStream.end();
   process.exit(0);
 });
