@@ -11,6 +11,11 @@ async function displayFilesInfo() {
 
     for (const file of files) {
       if (file.isFile()) {
+        const ignorePatterns = [/^\./, /\..*\..*\..*/];
+        if (ignorePatterns.some((pattern) => pattern.test(file.name))) {
+          continue;
+        }
+
         const filePath = path.join(folderPath, file.name);
         const fileStats = await fs.stat(filePath);
         const fileExt = path.extname(file.name);
